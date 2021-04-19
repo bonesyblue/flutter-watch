@@ -25,9 +25,17 @@ import Flutter
         channel.setMethodCallHandler { (call, result) in
             // Handle the method calls below
             switch call.method {
+            case "postString":
+                if let text = call.arguments as? String {
+                    self.handleText(text: text)
+                }
             default:
                 result(FlutterMethodNotImplemented)
             }
         }
+    }
+    
+    private func handleText(text: String){
+        print(text)
     }
 }
