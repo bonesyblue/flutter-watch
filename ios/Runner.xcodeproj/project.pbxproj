@@ -10,6 +10,7 @@
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
+		7C27D514262E3F5A009BA9A2 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C27D513262E3F5A009BA9A2 /* ContentViewModel.swift */; };
 		7C884464262DFEEC00ACDB8F /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C884462262DFEEC00ACDB8F /* Interface.storyboard */; };
 		7C884466262DFEEF00ACDB8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C884465262DFEEF00ACDB8F /* Assets.xcassets */; };
 		7C88446D262DFEEF00ACDB8F /* watchApp Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7C88446C262DFEEF00ACDB8F /* watchApp Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -86,6 +87,7 @@
 		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
 		74858FAE1ED2DC5600515810 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
+		7C27D513262E3F5A009BA9A2 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		7C884460262DFEEC00ACDB8F /* watchApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = watchApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C884463262DFEEC00ACDB8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		7C884465262DFEEF00ACDB8F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 			children = (
 				7C884471262DFEEF00ACDB8F /* HostingController.swift */,
 				7C884473262DFEEF00ACDB8F /* ContentView.swift */,
+				7C27D513262E3F5A009BA9A2 /* ContentViewModel.swift */,
 				7C884475262DFEEF00ACDB8F /* ExtensionDelegate.swift */,
 				7C884477262DFEEF00ACDB8F /* NotificationController.swift */,
 				7C884479262DFEEF00ACDB8F /* NotificationView.swift */,
@@ -382,6 +385,7 @@
 				7C884474262DFEEF00ACDB8F /* ContentView.swift in Sources */,
 				7C884472262DFEEF00ACDB8F /* HostingController.swift in Sources */,
 				7C884478262DFEEF00ACDB8F /* NotificationController.swift in Sources */,
+				7C27D514262E3F5A009BA9A2 /* ContentViewModel.swift in Sources */,
 				7C884476262DFEEF00ACDB8F /* ExtensionDelegate.swift in Sources */,
 				7C88447A262DFEEF00ACDB8F /* NotificationView.swift in Sources */,
 				7C88447C262DFEEF00ACDB8F /* ComplicationController.swift in Sources */,

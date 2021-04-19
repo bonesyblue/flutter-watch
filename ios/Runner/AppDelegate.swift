@@ -1,5 +1,6 @@
 import UIKit
 import Flutter
+import WatchConnectivity
 
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
@@ -7,6 +8,12 @@ import Flutter
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        // Activate the watch session if supported
+        if WCSession.isSupported() {
+            let session = WCSession.default
+            session.delegate = self
+            session.activate()
+        }
         
         if let controller = window?.rootViewController as? FlutterViewController {
             setupMethodChannels(with: controller)
@@ -37,5 +44,29 @@ import Flutter
     
     private func handleText(text: String){
         print(text)
+        let watchSession = WCSession.default
+        if watchSession.isPaired && watchSession.isReachable {
+            DispatchQueue.main.async {
+                print("Sending counter state to watch extension")
+                watchSession.sendMessage(
+                    ["counter": text],
+                    replyHandler: nil,
+                    errorHandler: nil)
+            }
+        } else {
+            print("Watch not reachable")
+        }
+    }
+}
+
+extension AppDelegate: WCSessionDelegate {
+    @available(iOS 9.3, *)
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+    }
+    
+    func sessionDidBecomeInactive(_ session: WCSession) {
+    }
+    
+    func sessionDidDeactivate(_ session: WCSession) {
     }
 }

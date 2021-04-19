@@ -50,13 +50,10 @@ const METHOD_CHANNEL_ID = 'com.example.watchExtension/methodChannel';
 
 class _MyHomePageState extends State<MyHomePage> {
   static const channel = const MethodChannel(METHOD_CHANNEL_ID);
+
   int _counter = 0;
 
   void _incrementCounter() {
-    /// Call a method on the MethodChannel. The first arguement is the method
-    /// name and the second the arguments.
-    channel.invokeMethod("postString", "Hello from flutter!");
-
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
@@ -65,6 +62,10 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
     });
+
+    /// Call a method on the MethodChannel. The first arguement is the method
+    /// name and the second the arguments.
+    channel.invokeMethod("postString", _counter.toString());
   }
 
   @override
