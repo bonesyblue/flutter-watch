@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(MyApp());
 }
 
+const METHOD_CHANNEL_ID = 'com.example.watchExtension/methodChannel';
+
 class MyApp extends StatelessWidget {
+  static const channel = const MethodChannel(METHOD_CHANNEL_ID);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
