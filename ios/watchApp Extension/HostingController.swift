@@ -11,7 +11,7 @@ import Foundation
 import SwiftUI
 
 class HostingController: WKHostingController<ContentView>  {
-    private let viewModel: ContentViewModel = ContentViewModel()
+    @ObservedObject var viewModel: ContentViewModel = ContentViewModel()
     
     override var body: ContentView {
         return ContentView(model: viewModel)

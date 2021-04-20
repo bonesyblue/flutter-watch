@@ -9,7 +9,7 @@
         <!--Hosting Controller-->
         <scene sceneID="RUd-og-cv4">
             <objects>
-                <hostingController id="NBu-mt-KyX" customClass="HostingController" customModule="watchApp" customModuleProvider="target"/>
+                <hostingController id="NBu-mt-KyX" identifier="HostingController" customClass="HostingController" customModule="watchApp_Extension" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="187" y="141"/>
         </scene>

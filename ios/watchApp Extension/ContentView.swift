@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    var model: ContentViewModel
+    @ObservedObject var model: ContentViewModel
     
     var body: some View {
         Text(model.value)

@@ -8,9 +8,11 @@
 import Foundation
 
 class ContentViewModel: ObservableObject {
-    @Published var value: String = ""
+    @Published var value: String = "0"
     
     func updateValue(with text: String){
-        self.value = text
+        DispatchQueue.main.async {
+            self.value = text
+        }
     }
 }
