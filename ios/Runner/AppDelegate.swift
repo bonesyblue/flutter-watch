@@ -4,6 +4,8 @@ import WatchConnectivity
 
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
+    static var eventSink: FlutterEventSink?
+    
     override func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
@@ -16,20 +18,20 @@ import WatchConnectivity
         }
         
         if let controller = window?.rootViewController as? FlutterViewController {
-            setupMethodChannels(with: controller)
+            setupFlutterChannels(with: controller)
         }
         
         GeneratedPluginRegistrant.register(with: self)
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
-    private func setupMethodChannels(with controller: FlutterViewController){
-        let channelId = "com.example.watchExtension/methodChannel"
-        let channel = FlutterMethodChannel(
-            name: channelId,
+    private func setupFlutterChannels(with controller: FlutterViewController){
+        let methodChannelId = "com.example.watchExtension/methodChannel"
+        let methodChannel = FlutterMethodChannel(
+            name: methodChannelId,
             binaryMessenger: controller.binaryMessenger
         )
-        channel.setMethodCallHandler { (call, result) in
+        methodChannel.setMethodCallHandler { (call, result) in
             // Handle the method calls below
             switch call.method {
             case "postString":
@@ -40,6 +42,13 @@ import WatchConnectivity
                 result(FlutterMethodNotImplemented)
             }
         }
+        
+        let eventChannelId = "com.example.watchExtension/eventChannel"
+        let eventChannel = FlutterEventChannel(
+            name: eventChannelId,
+            binaryMessenger: controller.binaryMessenger
+        )
+        eventChannel.setStreamHandler(self)
     }
     
     private func handleText(text: String){
@@ -69,4 +78,28 @@ extension AppDelegate: WCSessionDelegate {
     
     func sessionDidDeactivate(_ session: WCSession) {
     }
+    
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+        if let counterValue = message["counter"] as? String {
+            // If the event sink is available, post the value received from the WatchKit extension
+            AppDelegate.eventSink?(counterValue)
+        }
+    }
+}
+
+extension AppDelegate: FlutterStreamHandler {
+    func onListen(withArguments arguments: Any?, eventSink events: @escaping FlutterEventSink) -> FlutterError? {
+        /**
+         The event sink can be used to send data back to the Flutter client. See https://flutter.dev/docs/development/platform-integration/platform-channels#codec for supported data types and codecs. Add data to the stream by calling events(data). Use FlutterError to send errors and FlutterEndOfEventStream to signal completion of events.
+        */
+        AppDelegate.eventSink = events
+        return nil
+    }
+    
+    func onCancel(withArguments arguments: Any?) -> FlutterError? {
+        AppDelegate.eventSink = nil
+        return nil
+    }
+    
+    
 }

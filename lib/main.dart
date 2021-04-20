@@ -47,9 +47,33 @@ class MyHomePage extends StatefulWidget {
 }
 
 const METHOD_CHANNEL_ID = 'com.example.watchExtension/methodChannel';
+const EVENT_CHANNEL_ID = 'com.example.watchExtension/eventChannel';
 
 class _MyHomePageState extends State<MyHomePage> {
   static const channel = const MethodChannel(METHOD_CHANNEL_ID);
+  static const eventChannel = const EventChannel(EVENT_CHANNEL_ID);
+
+  Stream<String> _onMessageReceived;
+
+  /// Opens a subscription channel to listen for message events from the native platform code.
+  ///
+  /// Example:
+  /// ```dart
+  /// StreamSubscription<String> messageSubscriber = onMessageReceived()
+  ///   .listen(
+  ///     (message) => print(message),
+  ///     cancelOnError: true,
+  ///     (e) => print(e),
+  ///   );
+  /// ```
+  Stream<String> onMessageReceived() {
+    if (_onMessageReceived == null) {
+      _onMessageReceived =
+          eventChannel.receiveBroadcastStream().map((event) => event as String);
+    }
+
+    return _onMessageReceived;
+  }
 
   int _counter = 0;
 
@@ -66,6 +90,23 @@ class _MyHomePageState extends State<MyHomePage> {
     /// Call a method on the MethodChannel. The first arguement is the method
     /// name and the second the arguments.
     channel.invokeMethod("postString", _counter.toString());
+  }
+
+  @override
+  void initState() {
+    onMessageReceived().listen(
+      (event) {
+        final value = int.tryParse(event);
+        if (value != null) {
+          setState(() {
+            _counter = value;
+          });
+        }
+      },
+      cancelOnError: true,
+      onError: (e) => print(e),
+    );
+    super.initState();
   }
 
   @override
